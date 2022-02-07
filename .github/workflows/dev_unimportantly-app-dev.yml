@@ -1,12 +1,12 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - unimportantly-app2
+name: Build and deploy Node.js app to Azure Web App - unimportantly-app-dev
 
 on:
-  pull_request:
+  push:
     branches:
-      - main
+      - dev
   workflow_dispatch:
 
 jobs:
@@ -17,14 +17,14 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Connect to distant repository
+      - name: Download artifact from build job
         uses: actions/checkout@v2
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'unimportantly-app2'
+          app-name: 'unimportantly-app-dev'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B8923DD560A4456DADD2B9DB140626CF }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F660B1F45E934299B70EA8A399057943 }}
           package: .
